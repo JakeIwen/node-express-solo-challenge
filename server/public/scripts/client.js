@@ -1,6 +1,6 @@
 $(document).ready(function() {
   console.log('js loaded');
-
+  $("#jokeForm").on("submit", postJoke);
   getJokes();
 
   function getJokes() {
@@ -9,28 +9,25 @@ $(document).ready(function() {
       url: '/jokes',
       success: function(data) {
         console.log('got the joke data!');
-        appendJokes(data);
+        writeJokes(data);
       }
     });
   }
 
-  function appendJokes(jokes) {
+  function writeJokes(jokes) {
     $("#jokeList").empty();
 
     for (var i = 0; i < jokes.length; i++) {
-      $("#jokeList").append('<div><h2>' + jokes[i].whoseJoke + '</h2><p>' + jokes[i].jokeQuestion + '</p>' + jokes[i].punchLine + '</p></div>');
+      $("#jokeList").append('<div><h3>' + jokes[i].whoseJoke + '</h3><p>' + jokes[i].jokeQuestion + '</p>' + jokes[i].punchLine + '</p></div>');
     }
 
   }
 
-
-  $("#jokeList").on("submit", postJoke);
-
-  function postJoke(joke) {
+  function postJoke() {
     event.preventDefault();
     var newJoke = {};
 
-    $.each($('#jokeList').serializeArray(), function(i, field) {
+    $.each($('#jokeForm').serializeArray(), function(i, field) {
       newJoke[field.name] = field.value;
     });
 

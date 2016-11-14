@@ -1,5 +1,3 @@
-// initial jokes provided by the client
-
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
