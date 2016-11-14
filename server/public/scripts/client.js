@@ -16,9 +16,8 @@ $(document).ready(function() {
 
   function writeJokes(jokes) {
     $("#jokeList").empty();
-
-    for (var i = 0; i < jokes.length; i++) {
-      $("#jokeList").append('<div><h3>' + jokes[i].whoseJoke + '</h3><p>' + jokes[i].jokeQuestion + '</p>' + jokes[i].punchLine + '</p></div>');
+    for (var i = jokes.length - 1; i >= 0; i--) {
+      $("#jokeList").append('<div><p>' + jokes[i].jokeQuestion + '</p><p>' + jokes[i].punchLine + '</p><p> - ' + jokes[i].whoseJoke + '</p><br></div>');
     }
 
   }
@@ -26,13 +25,9 @@ $(document).ready(function() {
   function postJoke() {
     event.preventDefault();
     var newJoke = {};
-
     $.each($('#jokeForm').serializeArray(), function(i, field) {
       newJoke[field.name] = field.value;
     });
-
-    console.log(newJoke);
-
     $.ajax({
       type: 'POST',
       url: '/jokes',
