@@ -2,9 +2,25 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Node Express Joke Book</title>
+    <title>Joke Book App</title>
+    <script type="text/javascript" src="../vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="../scripts/client.js"></script>
   </head>
   <body>
+    <h1>HRD U LIEK JOKES</h1>
+    <form id="jokeForm">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" />
 
+      <label for="question">Joke Question:</label>
+      <input type="text" id="question" name="question" />
+
+      <label for="punchLine">Joke Punchline:</label>
+      <input type="text" id="punchLine" name="punchLine" />
+
+      <input type="submit" value="Add Joke" />
+    </form>
+
+    <section id="jokeList"></section>
   </body>
 </html>

@@ -1,18 +1,24 @@
 // initial jokes provided by the client
-var jokes = [
-  {
-    whoseJoke: "Huck",
-    jokeQuestion: "What's the difference between roast beef and pea soup?",
-    punchLine: "Anyone can roast beef."
-  },
-  {
-    whoseJoke: "Kris",
-    jokeQuestion: "How many software engineers does it take to change a lightbulb?",
-    punchLine: "None! That's a hardware problem!"
-  },
-  {
-    whoseJoke: "Luke",
-    jokeQuestion: "Friends are like snow flakes...",
-    punchLine: "If you pee on them they disappear."
-  }
-];
+
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+
+// routing modules
+var jokes = require('./routes/jokes');
+var index = require('./routes/index');
+
+// use body parser on EVERY request
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Routes
+app.use('/jokes', jokes);
+
+// Static Files
+app.use('/', index);
+
+// Set port to listen on
+app.set('port', process.env.PORT || 3000);
+app.listen(app.get('port'), function() {
+  console.log('server is listening on port ' + app.get('port'));
+});
